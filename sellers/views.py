@@ -21,7 +21,7 @@ class SellersListCreateAPIView(ListCreateAPIView):
 
 class SellersRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Seller.objects.all()
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, GlobalPermissionClass,)
     serializer_class = SellersSerializer
     
     
