@@ -1,4 +1,5 @@
 from authentication.permission import GlobalPermissionClass
+from genres.views import GenresListCreateAPIView
 from .serializers import ProductsSerializer
 from .models import Product
 from rest_framework.permissions import IsAuthenticated
