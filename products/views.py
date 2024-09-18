@@ -1,5 +1,5 @@
 from authentication.permission import GlobalPermissionClass
-from genres.views import GenresListCreateAPIView
+from rest_framework.filters import SearchFilter
 from .serializers import ProductsSerializer
 from .models import Product
 from rest_framework.permissions import IsAuthenticated
@@ -13,6 +13,8 @@ class ProductsListCreateAPIView(ListCreateAPIView):
     queryset = Product.objects.all()
     permission_classes = (IsAuthenticated, GlobalPermissionClass,)
     serializer_class = ProductsSerializer
+    filter_backends = [SearchFilter]
+    search_fields = ['name', 'seller__enterprise_name', 'genres__name']  
 
 
 
