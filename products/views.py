@@ -4,8 +4,14 @@ from .serializers import ProductsSerializer
 from .models import Product
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import (
+
+    # Admins
     ListCreateAPIView, 
-    RetrieveUpdateDestroyAPIView
+    RetrieveUpdateDestroyAPIView,
+
+    # Clients
+    ListAPIView,
+    RetrieveAPIView
 )
 
 
@@ -14,7 +20,21 @@ class ProductsListCreateAPIView(ListCreateAPIView):
     permission_classes = (IsAuthenticated, GlobalPermissionClass,)
     serializer_class = ProductsSerializer
     filter_backends = [SearchFilter]
+    search_fields = ['name', 'seller__enterprise_name', 'genres__name']
+    
+
+
+class ProductsListAPIView(ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductsSerializer
+    filter_backends = [SearchFilter]
     search_fields = ['name', 'seller__enterprise_name', 'genres__name']  
+
+
+
+class ProductsRetrieveAPIView(RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductsSerializer
 
 
 

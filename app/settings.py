@@ -27,7 +27,11 @@ SECRET_KEY = 'django-insecure-zaq#=4@c81b13^rt5ejxwlk&2y-lxn$*h8)8#fv#ou@cplcj2j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:8085',  # O domínio de onde você está fazendo a requisição
+]
 
 
 # Application definition
@@ -42,18 +46,22 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
+    'logs',
+
 
     'sellers',
     'products',
     'genres',
     'reviews',
     'account',
-    'logs'
+    'cart',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
