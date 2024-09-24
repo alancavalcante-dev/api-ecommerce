@@ -13,6 +13,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     value = models.DecimalField(max_digits=10,decimal_places=2)
     quantity = models.IntegerField()
+    freight = models.DecimalField(max_digits=10, decimal_places=2, default=7.50)
     image = models.ImageField(upload_to='products/images/')
     resume = models.TextField(blank=True, null=True)
 
