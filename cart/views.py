@@ -37,10 +37,25 @@ class AddToCartView(APIView):
 
         # Verifica se o produto já está no carrinho
         cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-        if not created:
-            cart_item.quantity += int(quantity)
-        else:
-            cart_item.quantity = int(quantity)
+        cart_item.quantity = int(quantity)
         cart_item.save()
 
         return Response({'message': 'Produto adicionado ao carrinho'}, status=status.HTTP_200_OK)
+
+
+
+class QuantityCardItem(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        cart_items_numbers = CartItem.objects.filter(
+            cart__user__id=request.user.id).count()
+
+        return Response({'quantity': cart_items_numbers}, status=status.HTTP_200_OK)
+
+
+
+class CartItemDestroyAPIView(generics.DestroyAPIView):
+    permission_classes = (IsAuthenticated, GlobalPermissionClass,)
+    serializer_class = CartItemSerializer
+    queryset = CartItem.objects.all()
