@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.validators import MinValueValidator, MaxLengthValidator
 from sellers.models import Seller
 from genres.models import Genre
 
@@ -19,4 +18,3 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-

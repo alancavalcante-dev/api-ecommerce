@@ -12,7 +12,7 @@ STARS = (
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='filhos')
     rate = models.CharField(max_length=10, default='5',choices=STARS)
     date = models.DateTimeField(auto_now_add=True)
 
