@@ -16,5 +16,11 @@ class Review(models.Model):
     rate = models.CharField(max_length=10, default='5',choices=STARS)
     date = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('user', 'product')
+
     def __str__(self):
         return self.product.name
+    
+
+
