@@ -33,9 +33,6 @@ class ProductsListAPIView(ListAPIView):
 
 
 
-
-
-
 class ProductsRetrieveAPIView(RetrieveAPIView):
     queryset = Product.objects.all()
     permission_classes = (IsAuthenticated, GlobalPermissionClass,)
@@ -49,3 +46,5 @@ class ProductsRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = ProductsSerializer
     
     
+
+
